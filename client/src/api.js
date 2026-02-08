@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const client = axios.create({ baseURL: 'http://localhost:4000' });
+const client = axios.create({ baseURL: 'https://valentines-day-yufb.onrender.com' });
 
 export async function fetchPhotos() {
   const res = await client.get('/api/photos');

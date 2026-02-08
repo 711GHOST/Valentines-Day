@@ -48,7 +48,7 @@ export default function Gallery(){
             <div className="p-3" onClick={() => setOpen(p)}>
               <div
                 className="w-full h-48 bg-cover bg-center rounded-md"
-                style={{ backgroundImage: `url(http://localhost:4000${p.imageURL})` }}
+                style={{ backgroundImage: `url(https://valentines-day-yufb.onrender.com${p.imageURL})` }}
               ></div>
               <div className="mt-3">
                 <h4 className="font-medium" style={{ color: '#5E355E' }}>
