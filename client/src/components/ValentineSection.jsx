@@ -26,7 +26,7 @@ export default function ValentineSection() {
     setAccepted(true);
   };
 
-  const yesScale = 1 + noCount * 0.2; // YES grows every time NO is pressed
+  const yesScale = 1 + noCount * 0.2; // YES grows every time NO is pressed (subs)
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#E8DFF5] via-[#F4EDE4] to-[#DCC6E0] px-6">

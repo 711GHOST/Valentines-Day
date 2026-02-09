@@ -7,7 +7,7 @@ import Timeline from './components/Timeline'
 import Surprise from './components/Surprise'
 import AudioPlayer from './components/AudioPlayer'
 import Slider from './components/Slider'
-import ValentineSection from './components/ValentineSection'
+import ValentineSection from './components/ValentineSection';
 
 export default function App(){
   const [loading, setLoading] = useState(true)
