@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import sunflower from '../assets/Sunflowers.jpg';
+import mountains from '../assets/Mountains.jpg';
+import newyork from '../assets/NewYork.jpg';
+import pizza from '../assets/ItalianPizza.jpg';
+import frenchfries from '../assets/FrenchFries.jpg';
 
 const images = [
   {
-    src: 'https://unsplash.com/photos/a-large-field-of-sunflowers-under-a-cloudy-sky-jycQ7JWIzX0',
+    src: sunflower,
     text: 'Sunflowers: A symbol of adoration and loyalty.',
   },
   {
-    src: 'https://source.unsplash.com/1600x900/?mountains',
+    src: mountains,
     text: 'Majestic mountains: Where the earth meets the sky.',
   },
   {
-    src: 'https://source.unsplash.com/1600x900/?newyork',
+    src: newyork,
     text: 'New York City: The city that never sleeps.',
   },
   {
-    src: 'https://source.unsplash.com/1600x900/?pizza',
+    src: pizza,
     text: 'Italian Maple Pizza: A slice of happiness.',
   },
   {
-    src: 'https://source.unsplash.com/1600x900/?frenchfries',
+    src: frenchfries,
     text: 'French Fries: Golden and crispy delights.',
   },
 ];
