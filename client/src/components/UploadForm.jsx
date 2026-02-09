@@ -33,8 +33,8 @@ export default function UploadForm({ onUploadSuccess }) {
         <label className="block text-sm text-warmgray mb-1">Image URL</label>
         <input
           type="url"
-          name="imageURL"
-          value={formData.imageURL}
+          name="image"
+          value={formData.image}
           onChange={handleChange}
           className="w-full p-2 border rounded-md"
           required

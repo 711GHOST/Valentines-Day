@@ -15,7 +15,7 @@ export default function UploadModal({ onClose, onUploadSuccess }) {
     e.preventDefault();
     setLoading(true);
     const data = new FormData();
-    data.append('imageFile', formData.imageFile);
+    data.append('image', formData.image);
     data.append('title', formData.title);
     data.append('note', formData.note);
 
@@ -52,7 +52,7 @@ export default function UploadModal({ onClose, onUploadSuccess }) {
             <label className="block text-sm text-warmgray mb-1">Image File (JPG, PNG, JPEG)</label>
             <input
               type="file"
-              name="imageFile"
+              name="image"
               accept="image/jpeg, image/png, image/jpg"
               onChange={handleChange}
               className="w-full p-2 border rounded-md"
