@@ -5,41 +5,32 @@ const cors = require('cors');
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
+const AWS = require('aws-sdk');
+const multerS3 = require('multer-s3');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const PORT = process.env.PORT || 4000;
-
-// Multer setup for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, 'uploads');
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath);
-    }
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, `${uniqueSuffix}-${file.originalname}`);
-  },
+// Configure AWS S3
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
 });
 
+// Configure Multer to use S3
 const upload = multer({
-  storage,
-  fileFilter: (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png/;
-    const extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimeType = fileTypes.test(file.mimetype);
-    if (extName && mimeType) {
-      return cb(null, true);
-    } else {
-      cb(new Error('Only .jpg, .jpeg, and .png files are allowed!'));
-    }
-  },
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.AWS_BUCKET_NAME,
+    metadata: (req, file, cb) => {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: (req, file, cb) => {
+      cb(null, `uploads/${Date.now()}-${file.originalname}`);
+    },
+  }),
 });
 
 // Models
@@ -76,14 +67,16 @@ app.get('/api/timeline', async (req, res) => {
 });
 
 // POST route to upload photos
-app.post('/api/photos', upload.single('imageFile'), async (req, res) => {
+app.post('/api/photos', upload.single('image'), async (req, res) => {
   try {
     const { title, note } = req.body;
-    const imageURL = `/uploads/${req.file.filename}`;
-    const newPhoto = await Photo.create({ imageURL, title, note });
+    const imageURL = req.file.location; // S3 URL
+    const newPhoto = new Photo({ title, note, imageURL });
+    await newPhoto.save();
     res.status(201).json(newPhoto);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error('Error uploading file:', error);
+    res.status(500).json({ error: 'Failed to upload file' });
   }
 });
 
