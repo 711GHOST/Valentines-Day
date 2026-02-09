@@ -50,7 +50,7 @@ export default function Gallery(){
                 className="w-full"
                 style={{
                   height: '75%',
-                  backgroundImage: `url(https://valentines-day-yufb.onrender.com${p.imageURL})`,
+                  backgroundImage: `url(${p.imageURL})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   aspectRatio: '4 / 3',
