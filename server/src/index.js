@@ -46,7 +46,8 @@ app.get('/api/photos', async (req, res) => {
     const photos = await Photo.find().sort({ date: -1 });
     res.json({ success: true, data: photos });
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+    console.error('Error fetching photos:', err);
+    res.status(500).json({ success: false, message: 'Failed to fetch photos' });
   }
 });
 
