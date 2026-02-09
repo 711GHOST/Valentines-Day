@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const images = [
   {
-    src: 'https://source.unsplash.com/1600x900/?sunflower',
+    src: 'https://unsplash.com/photos/a-large-field-of-sunflowers-under-a-cloudy-sky-jycQ7JWIzX0',
     text: 'Sunflowers: A symbol of adoration and loyalty.',
   },
   {
