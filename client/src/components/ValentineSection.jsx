@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function ValentineSection() {
+export default function ValentineSection({ onAccept }) {
   const messages = [
     "Are you sureeee? 🥺",
     "Think again… I make great coffee you know ☕",
@@ -24,6 +24,7 @@ export default function ValentineSection() {
 
   const handleYes = () => {
     setAccepted(true);
+    if (onAccept) onAccept();
   };
 
   const yesScale = 1 + noCount * 0.2; // YES grows every time NO is pressed (subs)
@@ -77,7 +78,7 @@ export default function ValentineSection() {
               YAYYYYY 💜
             </h2>
             <p className="text-xl text-[#7A6C74]">
-              Best decision you've ever made.  
+              Best decision you've ever made.
               Now we're officially the cutest couple alive.
             </p>
           </motion.div>

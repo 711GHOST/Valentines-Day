@@ -19,7 +19,7 @@ export default function App(){
 
   return (
     <div className="min-h-screen text-warmgray">
-      <AudioPlayer />
+      <AudioPlayer play={playMusic} />
       {loading ? (
         <LoadingScreen />
       ) : (
@@ -28,7 +28,7 @@ export default function App(){
           <Slider />
           <Gallery />
           <Letter />
-          <ValentineSection />
+          <ValentineSection onAccept={() => setPlayMusic(true)} />
           <Timeline />
           <Surprise />
         </main>
