@@ -14,7 +14,7 @@ export default function Hero(){
             Missy
           </motion.span>, loving you feels like home.
         </h2>
-        <p className="text-lg text-warmgray max-w-2xl mx-auto">Soft light, quiet mornings, and the comfort of your hand in mine — every day with you is gentle poetry.</p>
+        <p className="text-lg text-warmgray max-w-2xl mx-auto">Soft light, quiet mornings, and the comfort of your hand in mine - every day with you is gentle poetry.</p>
       </motion.div>
     </section>
   )
