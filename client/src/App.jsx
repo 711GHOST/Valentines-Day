@@ -11,6 +11,7 @@ import ValentineSection from './components/ValentineSection';
 
 export default function App(){
   const [loading, setLoading] = useState(true)
+  const [playMusic, setPlayMusic] = useState(false)
 
   useEffect(()=>{
     const t = setTimeout(()=>setLoading(false), 2400)
