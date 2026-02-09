@@ -25,13 +25,13 @@ export default function Letter(){
 
           <p>
             To the girl who paints my world in shades of beige, lavender, and black,
-            I still remember the 17th of July — the day our paths first crossed.
+            I still remember the 17th of July - the day our paths first crossed.
             Who would have thought that an ordinary day would turn into a memory
             I'd cherish forever?
           </p>
 
           <p>
-            Since that moment, every little thing about you has felt like a masterpiece —
+            Since that moment, every little thing about you has felt like a masterpiece -
             just like the Pinterest aesthetics you adore. To me, you are the mountains
             kissed by the first light of dawn, the royal charm of Udaipur, the endless
             skyline of New York, and the serene beauty of France.
@@ -39,7 +39,7 @@ export default function Letter(){
 
           <p>
             You are the sunflower that seeks the light and the lavender that soothes
-            my restless mind. I love the way your eyes sparkle at the simplest joys —
+            my restless mind. I love the way your eyes sparkle at the simplest joys -
             a delicate piece of jewelry, a playful pup wagging its tail (especially
             that Golden Retriever you dream of), or a shared Mexican pizza on a
             quiet evening.
@@ -52,19 +52,19 @@ export default function Letter(){
           </p>
 
           <p>
-            Whenever overthinking clouds your mind, I promise to be there — hand in
+            Whenever overthinking clouds your mind, I promise to be there - hand in
             hand, grounding you in the moment, like that magical pause before a kiss
             when the world seems to hold its breath. ✨
           </p>
 
           <p>
-            I dream of the day when your proudest moment arrives — the one you've
+            I dream of the day when your proudest moment arrives - the one you've
             worked so hard for. On that day, I'll be your loudest cheerleader,
             clapping until my hands ache, because I'll know how much it means to you.
           </p>
 
           <p>
-            Until then, let's treasure the little things together — momo at the metro,
+            Until then, let's treasure the little things together - momo at the metro,
             “Galliyan” playing softly in the background, pizza nights, and diary pages
             filled with our memories.
           </p>

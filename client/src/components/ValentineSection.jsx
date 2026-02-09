@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ValentineSection({ onAccept }) {
   const messages = [
@@ -8,7 +8,6 @@ export default function ValentineSection({ onAccept }) {
     "But I already told everyone you're mine 😭",
     "What if I bring chocolates? 🍫",
     "Okay but like… please? 🥹",
-    "This button is tired of being rejected 😔",
     "You really wanna hurt my romantic soul like this?",
     "Last chance before I dramatically faint 💀",
   ];
@@ -17,7 +16,7 @@ export default function ValentineSection({ onAccept }) {
   const [accepted, setAccepted] = useState(false);
 
   const handleNo = () => {
-    if (noCount < messages.length - 1) {
+    if (noCount < messages.length) {
       setNoCount(noCount + 1);
     }
   };
@@ -27,11 +26,12 @@ export default function ValentineSection({ onAccept }) {
     if (onAccept) onAccept();
   };
 
-  const yesScale = 1 + noCount * 0.2; // YES grows every time NO is pressed (subs)
+  const yesScale = 1 + noCount * 0.15;
+  const noGone = noCount >= messages.length;
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#E8DFF5] via-[#F4EDE4] to-[#DCC6E0] px-6">
-      <div className="text-center">
+      <div className="text-center max-w-xl">
 
         {!accepted ? (
           <>
@@ -39,9 +39,21 @@ export default function ValentineSection({ onAccept }) {
               Will you be my Valentine? 💜
             </h2>
 
-            <p className="text-lg text-[#7A6C74] mb-8 min-h-[30px] transition-all duration-300">
-              {noCount > 0 && messages[noCount - 1]}
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={noCount}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="text-lg text-[#7A6C74] mb-8 min-h-[40px]"
+              >
+                {noCount > 0 && !noGone && messages[noCount - 1]}
+
+                {noGone &&
+                  "Okay okay… I see how it is. I’ll just stand here holding this giant YES button until you press it 😌💜"}
+              </motion.p>
+            </AnimatePresence>
 
             <div className="flex justify-center gap-6 items-center">
 
@@ -55,17 +67,16 @@ export default function ValentineSection({ onAccept }) {
                 Yes 💖
               </motion.button>
 
-              {/* NO BUTTON */}
-              <motion.button
-                onClick={handleNo}
-                whileTap={{ scale: 0.9 }}
-                animate={{ x: noCount % 2 === 0 ? -5 : 5 }}
-                transition={{ duration: 0.2 }}
-                className="px-6 py-3 rounded-full bg-[#F6EFE6] text-[#5E355E] border border-[#C9B6E3]"
-              >
-                No 😅
-              </motion.button>
-
+              {/* NO BUTTON disappears after last click */}
+              {!noGone && (
+                <motion.button
+                  onClick={handleNo}
+                  whileTap={{ scale: 0.9 }}
+                  className="px-6 py-3 rounded-full bg-[#F6EFE6] text-[#5E355E] border border-[#C9B6E3]"
+                >
+                  No 😅
+                </motion.button>
+              )}
             </div>
           </>
         ) : (
@@ -78,8 +89,8 @@ export default function ValentineSection({ onAccept }) {
               YAYYYYY 💜
             </h2>
             <p className="text-xl text-[#7A6C74]">
-              Best decision you've ever made.
-              Now we're officially the cutest couple alive.
+              Best decision you've ever made.  
+              Now our love story officially continues ✨
             </p>
           </motion.div>
         )}
