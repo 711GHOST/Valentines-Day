@@ -11,12 +11,8 @@ export default function Gallery(){
 
   useEffect(()=>{
     const fetchAndUpdatePhotos = async () => {
-      const response = await fetchPhotos()
-      if (response.success) {
-        setPhotos(response.data)
-      } else {
-        console.error('Failed to fetch photos:', response.message)
-      }
+      const fetchedPhotos = await fetchPhotos()
+      setPhotos(fetchedPhotos)
     }
 
     fetchAndUpdatePhotos()
@@ -51,8 +47,14 @@ export default function Gallery(){
           >
             <div className="p-3" onClick={() => setOpen(p)}>
               <div
-                className="w-full h-48 bg-cover bg-center rounded-md"
-                style={{ backgroundImage: `url(${p.imageURL})` }}
+                className="w-full"
+                style={{
+                  height: '75%',
+                  backgroundImage: `url(${p.imageURL})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  aspectRatio: '4 / 3',
+                }}
               ></div>
               <div className="mt-3">
                 <h4 className="font-medium" style={{ color: '#5E355E' }}>
