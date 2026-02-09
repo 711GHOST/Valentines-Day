@@ -46,11 +46,16 @@ export default function Gallery(){
             className="soft-card rounded-lg overflow-hidden cursor-pointer"
           >
             <div className="p-3" onClick={() => setOpen(p)}>
-              <img
-                src={p.imageURL}
-                alt={p.title}
-                className="w-full h-48 object-cover rounded-md"
-              />
+              <div
+                className="w-full"
+                style={{
+                  height: '75%',
+                  backgroundImage: `url(${p.imageURL})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  aspectRatio: '4 / 3',
+                }}
+              ></div>
               <div className="mt-3">
                 <h4 className="font-medium" style={{ color: '#5E355E' }}>
                   {p.title}
