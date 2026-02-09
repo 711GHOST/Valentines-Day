@@ -84,6 +84,8 @@ app.post('/api/photos', upload.single('image'), async (req, res) => {
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
 // Connect DB then start
+const PORT = process.env.PORT || 4000;
+
 mongoose
   .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/missydb', {
     useNewUrlParser: true,
