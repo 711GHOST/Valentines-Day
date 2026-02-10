@@ -26,16 +26,17 @@ export default function ValentineSection({ onAccept }) {
     if (onAccept) onAccept();
   };
 
-  const yesScale = 1 + noCount * 0.15;
+  // Limit scaling so it doesn't break layout on mobile
+  const yesScale = Math.min(1 + noCount * 0.12, 2);
   const noGone = noCount >= messages.length;
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#E8DFF5] via-[#F4EDE4] to-[#DCC6E0] px-6">
-      <div className="text-center max-w-xl">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#E8DFF5] via-[#F4EDE4] to-[#DCC6E0] px-4 sm:px-6 py-10">
+      <div className="text-center w-full max-w-lg mx-auto">
 
         {!accepted ? (
           <>
-            <h2 className="text-4xl md:text-5xl font-serif text-[#5E355E] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#5E355E] mb-6 sm:mb-8 leading-snug">
               Will you be my Valentine? 💜
             </h2>
 
@@ -46,7 +47,7 @@ export default function ValentineSection({ onAccept }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="text-lg text-[#7A6C74] mb-8 min-h-[40px]"
+                className="text-base sm:text-lg text-[#7A6C74] mb-6 sm:mb-8 min-h-[50px] px-2"
               >
                 {noCount > 0 && !noGone && messages[noCount - 1]}
 
@@ -55,24 +56,24 @@ export default function ValentineSection({ onAccept }) {
               </motion.p>
             </AnimatePresence>
 
-            <div className="flex justify-center gap-6 items-center">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
 
               {/* YES BUTTON */}
               <motion.button
                 onClick={handleYes}
                 animate={{ scale: yesScale }}
                 transition={{ type: "spring", stiffness: 200 }}
-                className="px-8 py-3 rounded-full bg-[#C9B6E3] text-white font-semibold shadow-lg"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 rounded-full bg-[#C9B6E3] text-white font-semibold shadow-lg text-base sm:text-lg"
               >
                 Yes 💖
               </motion.button>
 
-              {/* NO BUTTON disappears after last click */}
+              {/* NO BUTTON */}
               {!noGone && (
                 <motion.button
                   onClick={handleNo}
                   whileTap={{ scale: 0.9 }}
-                  className="px-6 py-3 rounded-full bg-[#F6EFE6] text-[#5E355E] border border-[#C9B6E3]"
+                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#F6EFE6] text-[#5E355E] border border-[#C9B6E3] text-base sm:text-lg"
                 >
                   No 😅
                 </motion.button>
@@ -85,10 +86,10 @@ export default function ValentineSection({ onAccept }) {
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200 }}
           >
-            <h2 className="text-5xl font-serif text-[#5E355E] mb-4">
+            <h2 className="text-4xl sm:text-5xl font-serif text-[#5E355E] mb-4">
               YAYYYYY 💜
             </h2>
-            <p className="text-xl text-[#7A6C74]">
+            <p className="text-lg sm:text-xl text-[#7A6C74] px-2">
               Best decision you've ever made.  
               Now our love story officially continues ✨
             </p>
