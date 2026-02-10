@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { fetchTimeline } from '../api';
 import TimelineForm from './TimelineForm';
 
 export default function Timeline() {
@@ -9,8 +9,8 @@ export default function Timeline() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('/api/timeline');
-        setEvents(response.data.data);
+        const events = await fetchTimeline();
+        setEvents(events);
       } catch (error) {
         console.error('Error fetching timeline events:', error);
       }

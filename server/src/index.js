@@ -59,15 +59,6 @@ app.get('/api/letter', async (req, res) => {
   }
 });
 
-app.get('/api/timeline', async (req, res) => {
-  try {
-    const events = await TimelineEvent.find().sort({ date: -1 });
-    res.json({ success: true, data: events });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
-
 // POST route to upload photos
 app.post('/api/photos', upload.single('image'), async (req, res) => {
   try {

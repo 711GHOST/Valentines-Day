@@ -25,3 +25,8 @@ export async function uploadPhoto(data) {
   });
   return res.data;
 }
+
+export async function addTimelineEvent(data) {
+  const res = await client.post('/api/timeline', data);
+  return res.data.data;
+}
