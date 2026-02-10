@@ -10,13 +10,15 @@ import Slider from './components/Slider'
 import ValentineSection from './components/ValentineSection'
 import FloatingBackground from './components/FloatingBackground'
 
-export default function App(){
+export default function App() {
   const [loading, setLoading] = useState(true)
   const [playMusic, setPlayMusic] = useState(false)
 
   const enterSite = () => {
-    setLoading(false)
-  }
+    setLoading(false);
+    setPlayMusic(true);  // this just unmutes & fades in
+  };
+
 
   return (
     <div className="relative min-h-screen text-warmgray overflow-hidden">
