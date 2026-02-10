@@ -27,7 +27,7 @@ export default function AudioPlayer({ play }) {
     <audio
       ref={audioRef}
       loop
-      src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"
+      src="../assets/audio/Khat.mp3"
       style={{ display: "none" }}
     />
   );
