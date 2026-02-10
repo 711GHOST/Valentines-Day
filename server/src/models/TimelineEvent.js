@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-const TimelineEventSchema = new mongoose.Schema({
+const timelineEventSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  description: { type: String },
-  date: { type: Date },
-  createdAt: { type: Date, default: Date.now }
+  description: { type: String, required: true },
+  date: { type: Date, required: true },
 });
 
-module.exports = mongoose.model('TimelineEvent', TimelineEventSchema);
+module.exports = mongoose.model('TimelineEvent', timelineEventSchema);

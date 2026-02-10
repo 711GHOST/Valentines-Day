@@ -82,6 +82,30 @@ app.post('/api/photos', upload.single('image'), async (req, res) => {
   }
 });
 
+// Route to add a new timeline event
+app.post('/api/timeline', async (req, res) => {
+  try {
+    const { title, description, date } = req.body;
+    const newEvent = new TimelineEvent({ title, description, date });
+    await newEvent.save();
+    res.status(201).json({ success: true, data: newEvent });
+  } catch (error) {
+    console.error('Error adding timeline event:', error);
+    res.status(500).json({ success: false, message: 'Failed to add timeline event' });
+  }
+});
+
+// Route to fetch all timeline events
+app.get('/api/timeline', async (req, res) => {
+  try {
+    const events = await TimelineEvent.find().sort({ date: 1 }); // Sort by date ascending
+    res.json({ success: true, data: events });
+  } catch (error) {
+    console.error('Error fetching timeline events:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch timeline events' });
+  }
+});
+
 // health
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
