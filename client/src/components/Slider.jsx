@@ -18,6 +18,7 @@ const images = [
 
 export default function Slider() {
   const [[index, direction], setIndex] = useState([0, 0]);
+  const [isDarkImage, setIsDarkImage] = useState(false);
 
   const nextSlide = useCallback(() => {
     setIndex(([prev]) => [(prev + 1) % images.length, 1]);
@@ -41,15 +42,48 @@ export default function Slider() {
     return () => clearInterval(interval);
   }, [nextSlide]);
 
+  // 🔥 Brightness Detection
+  useEffect(() => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = images[index].src;
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      ctx.drawImage(img, 0, 0);
+
+      const imageData = ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      ).data;
+
+      let brightness = 0;
+      for (let i = 0; i < imageData.length; i += 4) {
+        const r = imageData[i];
+        const g = imageData[i + 1];
+        const b = imageData[i + 2];
+        brightness += (r + g + b) / 3;
+      }
+
+      brightness /= imageData.length / 4;
+
+      setIsDarkImage(brightness < 128);
+    };
+  }, [index]);
+
   const variants = {
     enter: (direction) => ({
       x: direction > 0 ? "100%" : "-100%",
       opacity: 0,
     }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
+    center: { x: 0, opacity: 1 },
     exit: (direction) => ({
       x: direction > 0 ? "-100%" : "100%",
       opacity: 0,
@@ -58,7 +92,6 @@ export default function Slider() {
 
   return (
     <section className="relative w-full overflow-hidden rounded-3xl shadow-2xl my-12">
-      {/* Maintain 16:9 Ratio */}
       <div className="relative w-full aspect-[16/9]">
 
         <AnimatePresence custom={direction}>
@@ -72,7 +105,7 @@ export default function Slider() {
             transition={{ duration: 0.9, ease: "easeInOut" }}
             className="absolute inset-0"
           >
-            {/* Image with subtle zoom */}
+            {/* Image */}
             <motion.div
               className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${images[index].src})` }}
@@ -81,13 +114,21 @@ export default function Slider() {
               transition={{ duration: 6 }}
             />
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-8 md:p-16">
+            {/* Dynamic Gradient Overlay */}
+            <div
+              className={`absolute inset-0 flex items-end p-6 sm:p-10 md:p-16 transition-all duration-500 ${
+                isDarkImage
+                  ? "bg-gradient-to-t from-black/70 via-black/40 to-transparent"
+                  : "bg-gradient-to-t from-white/60 via-white/30 to-transparent"
+              }`}
+            >
               <motion.h2
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-white text-2xl md:text-4xl font-semibold max-w-2xl"
+                className={`text-xl sm:text-2xl md:text-4xl font-semibold max-w-2xl transition-colors duration-500 ${
+                  isDarkImage ? "text-white" : "text-black"
+                }`}
               >
                 {images[index].text}
               </motion.h2>
@@ -95,32 +136,36 @@ export default function Slider() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Left Arrow */}
+        {/* Left Arrow (Hidden on Mobile) */}
         <button
           onClick={prevSlide}
-          className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white p-3 rounded-full transition"
+          className="hidden sm:block absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white p-2 sm:p-3 rounded-full transition"
         >
-          <ChevronLeft size={30} />
+          <ChevronLeft size={20} className="sm:w-[30px] sm:h-[30px]" />
         </button>
 
-        {/* Right Arrow */}
+        {/* Right Arrow (Hidden on Mobile) */}
         <button
           onClick={nextSlide}
-          className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white p-3 rounded-full transition"
+          className="hidden sm:block absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md hover:bg-white/40 text-white p-2 sm:p-3 rounded-full transition"
         >
-          <ChevronRight size={30} />
+          <ChevronRight size={20} className="sm:w-[30px] sm:h-[30px]" />
         </button>
 
         {/* Dots */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3">
           {images.map((_, i) => (
             <button
               key={i}
               onClick={() => goToSlide(i)}
-              className={`h-3 w-3 rounded-full transition-all duration-300 ${
+              className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full transition-all duration-300 ${
                 i === index
-                  ? "bg-white scale-125"
-                  : "bg-white/50 hover:bg-white"
+                  ? isDarkImage
+                    ? "bg-white scale-125"
+                    : "bg-black scale-125"
+                  : isDarkImage
+                  ? "bg-white/50 hover:bg-white"
+                  : "bg-black/50 hover:bg-black"
               }`}
             />
           ))}
