@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function ValentineSection({ onAccept }) {
   const messages = [
     "Are you sureeee? 🥺",
-    "Think again… I make great coffee you know ☕",
+    "Think again… I make great tea you know ☕",
     "But I already told everyone you're mine 😭",
-    "What if I bring chocolates? 🍫",
+    "What if I bring Snacks?",
     "Okay but like… please? 🥹",
     "You really wanna hurt my romantic soul like this?",
     "Last chance before I dramatically faint 💀",
@@ -30,12 +30,12 @@ export default function ValentineSection({ onAccept }) {
   const noGone = noCount >= messages.length;
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#E8DFF5] via-[#F4EDE4] to-[#DCC6E0] px-6">
-      <div className="text-center max-w-xl">
+    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#E8DFF5] via-[#F4EDE4] to-[#DCC6E0] px-4 md:px-6">
+      <div className="text-center max-w-sm md:max-w-xl">
 
         {!accepted ? (
           <>
-            <h2 className="text-4xl md:text-5xl font-serif text-[#5E355E] mb-8">
+            <h2 className="text-3xl md:text-5xl font-serif text-[#5E355E] mb-6 md:mb-8">
               Will you be my Valentine? 💜
             </h2>
 
@@ -46,7 +46,7 @@ export default function ValentineSection({ onAccept }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="text-lg text-[#7A6C74] mb-8 min-h-[40px]"
+                className="text-base md:text-lg text-[#7A6C74] mb-6 md:mb-8 min-h-[40px]"
               >
                 {noCount > 0 && !noGone && messages[noCount - 1]}
 

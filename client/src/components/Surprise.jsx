@@ -5,17 +5,17 @@ export default function Surprise() {
   const [messageVisible, setMessageVisible] = useState(false);
 
   return (
-    <section className="py-8 text-center">
+    <section className="py-6 md:py-8 text-center">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1 }}
-        className="soft-card p-6 rounded-lg"
+        className="soft-card p-4 md:p-6 rounded-lg"
       >
         {!messageVisible ? (
           <>
-            <h3 className="text-2xl font-semibold mb-4" style={{ color: '#5E355E' }}>
+            <h3 className="text-xl md:text-2xl font-semibold mb-3 md:mb-4" style={{ color: '#5E355E' }}>
               Click here, Missy
             </h3>
             <motion.div

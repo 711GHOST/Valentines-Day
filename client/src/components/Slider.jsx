@@ -57,7 +57,18 @@ export default function Slider() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden rounded-3xl shadow-2xl my-12">
+    <section className="relative py-6 md:py-10 px-4 md:px-6">
+      <div className="flex justify-between items-center mb-4 md:mb-6">
+        <h3 className="text-xl md:text-2xl font-semibold" style={{ color: '#5E355E' }}>
+          Photo Memories
+        </h3>
+        <button
+          onClick={() => setUploadModalOpen(true)}
+          className="bg-lavender text-white px-3 md:px-4 py-2 rounded-md hover:bg-lavender/90"
+        >
+          Upload
+        </button>
+      </div>
 
       {/* Maintain 16:9 Ratio */}
       <div className="relative w-full aspect-[16/9]">

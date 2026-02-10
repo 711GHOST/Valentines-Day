@@ -28,7 +28,7 @@ export default function AudioPlayer({ play }) {
       ref={audioRef}
       loop
       src="/audio/Khat.mp3"
-      style={{ display: "none" }}
+      className="hidden"
     />
   );
 }

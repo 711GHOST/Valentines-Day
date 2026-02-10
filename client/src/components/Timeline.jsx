@@ -24,14 +24,14 @@ export default function Timeline() {
   };
 
   return (
-    <section className="relative py-20 bg-beige px-10">
-      <h2 className="text-3xl font-semibold text-plum mb-6">
+    <section className="relative py-10 md:py-20 bg-beige px-6 md:px-10">
+      <h2 className="text-2xl md:text-3xl font-semibold text-plum mb-4 md:mb-6">
         Timeline
       </h2>
 
       <button
         onClick={() => setModalOpen(true)}
-        className="bg-lavender hover:bg-lavender-500 text-white px-6 py-2 rounded-full shadow-soft transition mb-12"
+        className="bg-lavender hover:bg-lavender-500 text-white px-4 md:px-6 py-2 rounded-full shadow-soft transition mb-8 md:mb-12"
       >
         Add Timeline Event
       </button>
