@@ -3,9 +3,9 @@ import { motion } from 'framer-motion'
 
 export default function Letter(){
   return (
-    <section className="py-6 md:py-8">
+    <section className="py-8">
       <h3 
-        className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-center"
+        className="text-2xl font-semibold mb-6 text-center"
         style={{color:'#5E355E'}}
       >
         A Letter for My Missy
@@ -16,11 +16,11 @@ export default function Letter(){
         whileInView={{opacity:1,y:0}}
         viewport={{once:true}}
         transition={{duration:0.8}}
-        className="soft-card p-6 md:p-8 rounded-xl leading-7 md:leading-8"
+        className="soft-card p-8 rounded-xl leading-8"
       >
         <div 
           style={{fontFamily:'Georgia, serif', color:'#6B3E6B'}}
-          className="space-y-6 text-lg md:text-xl"
+          className="space-y-6 text-lg"
         >
 
           <p>

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 md:px-6">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
 
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#E8DFF5] via-[#F4EDE4] to-[#DCC6E0]" />
@@ -12,12 +12,12 @@ export default function Hero() {
       <motion.div
         animate={{ y: [0, -20, 0] }}
         transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-10 md:top-20 left-10 md:left-20 w-40 md:w-72 h-40 md:h-72 bg-[#C9B6E3]/30 rounded-full blur-3xl"
+        className="absolute top-20 left-20 w-72 h-72 bg-[#C9B6E3]/30 rounded-full blur-3xl"
       />
       <motion.div
         animate={{ y: [0, 25, 0] }}
         transition={{ duration: 10, repeat: Infinity }}
-        className="absolute bottom-10 md:bottom-20 right-10 md:right-20 w-48 md:w-96 h-48 md:h-96 bg-[#F6EFE6]/60 rounded-full blur-3xl"
+        className="absolute bottom-20 right-20 w-96 h-96 bg-[#F6EFE6]/60 rounded-full blur-3xl"
       />
 
       {/* Glass Card */}
