@@ -8,6 +8,7 @@ export default function Gallery(){
   const [photos, setPhotos] = useState([])
   const [open, setOpen] = useState(null)
   const [isUploadModalOpen, setUploadModalOpen] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(3) // 👈 show only 3 initially
 
   useEffect(()=>{
     const fetchAndUpdatePhotos = async () => {
@@ -17,12 +18,16 @@ export default function Gallery(){
 
     fetchAndUpdatePhotos()
 
-    const interval = setInterval(fetchAndUpdatePhotos, 5000) // Poll every 5 seconds
+    const interval = setInterval(fetchAndUpdatePhotos, 5000)
     return () => clearInterval(interval)
   },[])
 
   const handleNewPhoto = (newPhoto) => {
     setPhotos((prev) => [newPhoto, ...prev])
+  }
+
+  const showMore = () => {
+    setVisibleCount((prev) => prev + 3)
   }
 
   return (
@@ -38,8 +43,9 @@ export default function Gallery(){
           Upload Memory
         </button>
       </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {photos.map((p) => (
+        {photos.slice(0, visibleCount).map((p) => (
           <motion.div
             key={p._id || p.imageURL}
             whileHover={{ scale: 1.02, rotate: -1 }}
@@ -49,7 +55,6 @@ export default function Gallery(){
               <div
                 className="w-full"
                 style={{
-                  height: '75%',
                   backgroundImage: `url(${p.imageURL})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
@@ -66,7 +71,21 @@ export default function Gallery(){
           </motion.div>
         ))}
       </div>
+
+      {/* Show More Button */}
+      {visibleCount < photos.length && (
+        <div className="mt-10 flex justify-center">
+          <button
+            onClick={showMore}
+            className="bg-lavender-200 hover:bg-lavender-300 text-plum px-6 py-2 rounded-full transition shadow-soft"
+          >
+            Show More
+          </button>
+        </div>
+      )}
+
       {open && <PhotoModal photo={open} onClose={() => setOpen(null)} />}
+
       {isUploadModalOpen && (
         <UploadModal
           onClose={() => setUploadModalOpen(false)}
