@@ -5,12 +5,19 @@ import TimelineForm from "./TimelineForm";
 export default function Timeline() {
   const [events, setEvents] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(5); // show first 5 events
 
   useEffect(() => {
     const loadEvents = async () => {
       try {
         const data = await fetchTimeline();
-        setEvents(data);
+
+        // Sort by date (oldest to newest)
+        const sortedData = [...data].sort(
+          (a, b) => new Date(a.date) - new Date(b.date)
+        );
+
+        setEvents(sortedData);
       } catch (error) {
         console.error("Error fetching timeline events:", error);
       }
@@ -20,7 +27,15 @@ export default function Timeline() {
   }, []);
 
   const addEvent = (newEvent) => {
-    setEvents((prev) => [...prev, newEvent]);
+    setEvents((prev) =>
+      [...prev, newEvent].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      )
+    );
+  };
+
+  const showMore = () => {
+    setVisibleCount((prev) => prev + 5);
   };
 
   return (
@@ -43,22 +58,18 @@ export default function Timeline() {
         />
       )}
 
-      {/* Timeline Container */}
       <div className="relative ml-10">
 
-        {/* Vertical Line */}
         <div className="absolute left-3 top-0 w-1 bg-lavender-200 h-full"></div>
 
         <div className="space-y-16">
-          {events.map((event) => (
+          {events.slice(0, visibleCount).map((event) => (
             <div key={event._id} className="relative group flex items-start">
 
-              {/* Circle */}
               <div className="relative z-10">
                 <div className="w-6 h-6 bg-lavender border-4 border-beige rounded-full shadow-soft transition-all duration-300 group-hover:scale-125 group-hover:bg-lavender-500"></div>
               </div>
 
-              {/* Card */}
               <div className="ml-8 bg-beige-100 border border-lavender-300 p-6 rounded-2xl shadow-soft transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl group-hover:border-lavender-500 w-full max-w-xl">
                 <h3 className="text-lg font-semibold text-plum">
                   {event.title}
@@ -76,6 +87,18 @@ export default function Timeline() {
             </div>
           ))}
         </div>
+
+        {/* Show More Button */}
+        {visibleCount < events.length && (
+          <div className="mt-12">
+            <button
+              onClick={showMore}
+              className="bg-lavender-200 hover:bg-lavender-300 text-plum px-6 py-2 rounded-full transition shadow-soft"
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
