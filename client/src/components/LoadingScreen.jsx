@@ -104,7 +104,7 @@ export default function LoadingScreen({ onEnter }) {
           >
             Tanya
           </motion.span>{" "}
-          — my{" "}
+          - my{" "}
           <motion.span
             whileHover={{ scale: 1.2 }}
             transition={{ type: "spring", stiffness: 300 }}
